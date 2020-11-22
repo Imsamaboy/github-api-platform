@@ -44,10 +44,6 @@ public class Triangle {
 
     @Override
     public String toString() {
-        return "Triangle{" +
-                "a=" + a +
-                ", b=" + b +
-                ", c=" + c +
-                '}';
+        return a + " " + b + " " + c;
     }
 }

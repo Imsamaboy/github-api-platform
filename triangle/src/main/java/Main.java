@@ -25,7 +25,6 @@ public class Main {
             Point point_2 = new Point(list.get(2), list.get(3));
             Point point_3 = new Point(list.get(4), list.get(5));
 
-            //ArrayList<Point> temp = new ArrayList<Point>(Arrays.asList(point_1, point_2, point_3));
             listOfPoints.add(new ArrayList<Point>(Arrays.asList(point_1, point_2, point_3)));
         }
 
@@ -51,11 +50,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        String path = "E:\\__Java\\java_au\\triangle\\1.txt";
-        List<String> listOfStrings = ReadWriteUtil.read(path);
+        List<String> listOfStrings = ReadWriteUtil.read(args[1]);
         ArrayList<ArrayList<Point>> listOfPoints = parseListOfStrings(listOfStrings);
         List<Triangle> listOfTriangles = getListOfTriangles(listOfPoints);
 
-        System.out.println(getIsoscelesTriangleWithMaxSquare(listOfTriangles).get(0));
+        ReadWriteUtil.write(args[2], getIsoscelesTriangleWithMaxSquare(listOfTriangles).get(0).toString());
     }
 }
