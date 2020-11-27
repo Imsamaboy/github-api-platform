@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class Main {
     public static ArrayList<ArrayList<Point>> parseListOfStrings(List<String> listOfStrings) {
         List<List<String>> filteredList = listOfStrings.stream()
+                                                    .filter(x -> x.matches("-?[0-9]+ -?[0-9]+ -?[0-9]+ -?[0-9]+ -?[0-9]+ -?[0-9]"))
                                                     .map(x -> Arrays.asList(x.split(" ")))
                                                     .filter(x -> x.size() == 6)
                                                     .collect(Collectors.toList());
@@ -37,7 +38,6 @@ public class Main {
                                                                                list.get(1),
                                                                                list.get(2)))
                                                      .collect(Collectors.toList());
-        listOfTriangles.forEach(System.out::println);
         return listOfTriangles;
     }
 
@@ -54,6 +54,10 @@ public class Main {
         ArrayList<ArrayList<Point>> listOfPoints = parseListOfStrings(listOfStrings);
         List<Triangle> listOfTriangles = getListOfTriangles(listOfPoints);
 
-        ReadWriteUtil.write(args[2], getIsoscelesTriangleWithMaxSquare(listOfTriangles).get(0).toString());
+        if (listOfTriangles.size() != 0) {
+            ReadWriteUtil.write(args[2], getIsoscelesTriangleWithMaxSquare(listOfTriangles).get(0).toString());
+        } else {
+            ReadWriteUtil.write(args[2], "");
+        }
     }
 }
