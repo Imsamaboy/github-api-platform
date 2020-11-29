@@ -1,14 +1,14 @@
-class MyLinkedList {
+class MyLinkedList <T> {
 
     private class ListNode {
         ListNode next;
         ListNode prev;
-        int val;
+        T val;
 
         ListNode() {
         }
 
-        ListNode(int val, ListNode next, ListNode prev) {
+        ListNode(T val, ListNode next, ListNode prev) {
             this.val = val;
             this.next = next;
             this.prev = prev;
@@ -25,23 +25,22 @@ class MyLinkedList {
         size = 0;
     }
 
-    public int get(int index) {
-        if (index >= size || index < 0) {
-            return -1;
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
         }
-
         return getNode(index).val;
     }
 
-    public void addAtHead(int val) {
+    public void addAtHead(T val) {
         addNewNodeAfter(head, val);
     }
 
-    public void addAtTail(int val) {
+    public void addAtTail(T val) {
         addNewNodeBefore(tail, val);
     }
 
-    public void addAtIndex(int index, int val) {
+    public void addAtIndex(int index, T val) {
         if (index == 0) {
             addAtHead(val);
             return ;
@@ -87,7 +86,7 @@ class MyLinkedList {
         return current;
     }
 
-    private void addNewNodeAfter(ListNode node, int val) {
+    private void addNewNodeAfter(ListNode node, T val) {
         var newNode = new ListNode(val, node.next, node);
 
         node.next.prev = newNode;
@@ -96,7 +95,7 @@ class MyLinkedList {
         size++;
     }
 
-    private void addNewNodeBefore(ListNode node, int val) {
+    private void addNewNodeBefore(ListNode node, T val) {
         var newNode = new ListNode(val, node, node.prev);
 
         node.prev.next = newNode;
