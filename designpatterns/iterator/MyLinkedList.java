@@ -1,4 +1,7 @@
-class MyLinkedList <T> {
+import java.util.Iterator;
+import java.util.function.Consumer;
+
+class MyLinkedList <T> implements Iterable<T> {
 
     private class ListNode {
         ListNode next;
@@ -102,5 +105,28 @@ class MyLinkedList <T> {
         node.prev = newNode;
 
         size++;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            int index = 0;
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new UnsupportedOperationException();
+                }
+                return get(index++);
+            }
+        };
+    }
+
+    @Override
+    public void forEach(Consumer action) {
     }
 }
